@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume - Ryan Bruckner</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <style>
+        .resume-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .resume-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .resume-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .resume-card {
+            background: var(--bg-color);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .resume-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+        }
+        
+        .entry-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        
+        .entry-subtitle {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .date {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+        
+        /* PDF Section Styles */
+        .pdf-section {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+        }
+        
+        .pdf-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pdf-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            margin: 0 auto 2rem auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .download-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            margin: 0 1rem;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+            
+            .resume-card {
+                padding: 1.5rem;
+            }
+            
+            .pdf-viewer {
+                height: 400px;
+            }
+            
+            .download-button {
+                margin: 0.5rem 0;
+                display: block;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="umd.html">UMD</a></li>
+            <li><a href="resume.html" class="active">Resume</a></li>
+            <li><a href="career.html">Career Interests</a></li>
+            <li><a href="game.html">Interactive Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="resume-container">
+            <div class="resume-header">
+                <h1>Ryan Bruckner</h1>
+                <p>Environmental Business & Sustainability Student</p>
+            </div>
+            
+            <div class="resume-card">
+                <h2 class="section-title">🎓 Education</h2>
+                <h3 class="entry-title">University of Minnesota Duluth (UMD)</h3>
+                <p class="date">Present</p>
+                <p class="description">Bachelor of Science in Environment, Sustainability & Geography</p>
+                <ul class="description">
+                    <li>Sophomore standing</li>
+                    <li>Focus on environmental management and sustainable business practices</li>
+                    <li>Active participant in campus sustainability initiatives</li>
+                </ul>
+            </div>
+            
+            <div class="resume-card">
+                <h2 class="section-title">💼 Experience</h2>
+                <h3 class="entry-title">Golf Course Grounds Crew</h3>
+                <p class="entry-subtitle">Seasonal Position</p>
+                <p class="date">Summer 2025</p>
+                <ul class="description">
+                    <li>Maintained course conditions through daily maintenance routines starting at 6 AM</li>
+                    <li>Collaborated with team members to ensure optimal playing conditions</li>
+                    <li>Gained hands-on experience in environmental management and landscape maintenance</li>
+                    <li>Demonstrated reliability and work ethic in outdoor, physically demanding environment</li>
+                </ul>
+            </div>
+            
+            <div class="resume-card">
+                <h2 class="section-title">🏉 Athletics</h2>
+                <h3 class="entry-title">UMD Rugby Team</h3>
+                <p class="date">Present</p>
+                <ul class="description">
+                    <li>Active member of the university rugby team currently competing in playoffs</li>
+                    <li>Demonstrate strong teamwork and leadership skills through regular practice and competition</li>
+                    <li>Balance athletic commitments with academic responsibilities</li>
+                    <li>Builds character through physical and mental challenges</li>
+                </ul>
+            </div>
+            
+            <div class="resume-card">
+                <h2 class="section-title">🏕️ Outdoor Experience</h2>
+                <h3 class="entry-title">Canadian Wilderness Expedition</h3>
+                <p class="date">Adventure Leadership</p>
+                <ul class="description">
+                    <li>Participated in a fly-in fishing expedition in remote Canadian wilderness</li>
+                    <li>Successfully navigated challenging environmental conditions</li>
+                    <li>Demonstrated outdoor skills and environmental awareness</li>
+                    <li>Developed self-reliance and problem-solving capabilities</li>
+                </ul>
+            </div>
+            
+            <div class="resume-card">
+                <h2 class="section-title">🛠️ Skills & Interests</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <strong>Environmental Management & Sustainability</strong>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Team Leadership & Collaboration</strong>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Landscape Maintenance</strong>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Outdoor Activities & Conservation</strong>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Project Coordination</strong>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Time Management</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pdf-section">
+            <h2>📄 Resume Download</h2>
+            <p class="pdf-description">
+                Download my complete resume in PDF format. You can view it below or save it for your records.
+            </p>
+            
+            <iframe src="files/Copy of Ryan Bruckner-Resume (1).pdf" class="pdf-viewer"></iframe>
+            
+            <a href="files/Copy of Ryan Bruckner-Resume (1).pdf" download="Ryan-Bruckner-Resume.pdf" class="download-button">
+                📥 Download Resume (PDF)
+            </a>
+        </div>
+    </div>
+</body>
+</html>

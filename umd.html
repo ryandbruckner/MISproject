@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Choose University of Minnesota Duluth?</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <style>
+        .umd-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .umd-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .umd-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .umd-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .video-section {
+            background: var(--bg-color);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .video-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .reasons-section {
+            margin-bottom: 3rem;
+        }
+        
+        .reasons-section h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .reason-card {
+            background: var(--bg-color);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .reason-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .reason-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .reason-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .stats-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .umd-header h1 {
+                font-size: 2rem;
+            }
+            
+            .reason-card {
+                padding: 1.5rem;
+            }
+            
+            .reason-title {
+                font-size: 1.4rem;
+            }
+            
+            .reason-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="umd.html" class="active">UMD</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="career.html">Career Interests</a></li>
+            <li><a href="game.html">Interactive Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="umd-container">
+            <div class="umd-header">
+                <h1>Why Choose University of Minnesota Duluth?</h1>
+                <p>Discover what makes UMD the perfect choice for your academic journey</p>
+            </div>
+            
+            <div class="video-section">
+                <h2>🎬 Experience UMD Through Our Eyes</h2>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Watch this video to get an insider's perspective on life at the University of Minnesota Duluth and see why students love calling Duluth home.
+                </p>
+                <div class="video-container">
+                    <video controls poster="images/UMD-poster.jpg">
+                        <source src="videos/video/MIS_video.mp4" type="video/mp4">
+                        Your browser does not support the video tag. Please try a different browser to watch this video.
+                    </video>
+                </div>
+            </div>
+            
+            <div class="reasons-section">
+                <h2>Three Reasons to Choose UMD</h2>
+                
+                <div class="reason-card">
+                    <h3 class="reason-title">
+                        🏗️ Iconic Duluth Architecture & Innovation
+                    </h3>
+                    <img src="images/liftbridge.webp" alt="Duluth Lift Bridge" class="reason-image">
+                    <p class="reason-description">
+                        The famous Duluth Lift Bridge stands as a symbol of engineering excellence and innovation - values that UMD embodies 
+                        in its approach to education. Just like this iconic bridge connects communities across Lake Superior, UMD connects 
+                        students to endless opportunities, world-class faculty, and cutting-edge research facilities that prepare you for success.
+                    </p>
+                </div>
+                
+                <div class="reason-card">
+                    <h3 class="reason-title">
+                        🗼 Historic Maritime Heritage & Learning
+                    </h3>
+                    <img src="images/Lighthouse.jpg" alt="Duluth Lighthouse" class="reason-image">
+                    <p class="reason-description">
+                        Like the historic lighthouse guiding ships to safety, UMD serves as a beacon of knowledge, illuminating paths to 
+                        academic and career success. Located on the stunning shores of Lake Superior, our maritime heritage reminds us 
+                        of the importance of navigation, exploration, and discovery - principles that drive our innovative educational approach.
+                    </p>
+                </div>
+                
+                <div class="reason-card">
+                    <h3 class="reason-title">
+                        ⛰️ Year-Round Adventure & Outdoor Recreation
+                    </h3>
+                    <img src="images/spiritmountain.jpg" alt="Spirit Mountain" class="reason-image">
+                    <p class="reason-description">
+                        Spirit Mountain showcases Duluth's incredible outdoor recreation opportunities right at UMD's doorstep. From skiing 
+                        and snowboarding in winter to hiking, mountain biking, and scenic overlooks year-round, UMD students enjoy the perfect 
+                        balance of academic excellence and outdoor adventure that makes every semester an unforgettable experience.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <h2>UMD by the Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">16,000+</span>
+                        <span class="stat-label">Students on Campus</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Academic Programs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">300+</span>
+                        <span class="stat-label">Student Organizations</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Graduation Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1:16</span>
+                        <span class="stat-label">Faculty-to-Student Ratio</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">#1</span>
+                        <span class="stat-label">Regional Public University</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

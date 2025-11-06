@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --section-padding: 4rem 2rem;
+            --header-height: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        nav {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .hero {
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: var(--header-height);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            max-width: 300px;
+            border-radius: 50%;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .welcome-video {
+            max-width: 500px;
+            max-height: 300px;
+            width: 100%;
+            height: auto;
+            margin: 1rem auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .video-description {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            color: #fff;
+        }
+
+        .video-caption {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        .hobbies-section {
+            padding: var(--section-padding);
+            background: white;
+        }
+
+        .hobbies-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .hobby-card {
+            background: var(--bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hobby-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .hobby-content {
+            padding: 1.5rem;
+        }
+
+        .hobby-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hobby-content p {
+            margin-bottom: 1rem;
+        }
+
+        .hobby-content a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .hobby-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="umd.html">UMD</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="career.html">Career Interests</a></li>
+            <li><a href="game.html">Interactive Game</a></li>
+        </ul>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My Website</h1>
+            <img src="images/Ryan18.JPG" alt="My Professional Headshot" class="profile-img">
+            <p>Hello! I'm Ryan Bruckner, a Sophomore at the University of Minnesota-Duluth, studying Business and Environment, Sustainability & Geography. I hope to use these skills to help others and the Earth!</p>
+            
+            <p class="video-description">Welcome Video:</p>
+            <video class="welcome-video" controls playsinline>
+                <source src="videos/Welcome.MOV" type="video/quicktime">
+                <source src="videos/Welcome.MOV" type="video/mp4">
+                <source src="videos/Welcome.MOV" type="video/*">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <section class="hobbies-section">
+        <h2 class="section-title">My Hobbies</h2>
+        <div class="hobbies-container">
+            <div class="hobby-card">
+                <img src="images/outdoors.jpg" alt="Beach Day at Park Point">
+                <div class="hobby-content">
+                    <h3>Outdoor Activities</h3>
+                    <p>I enjoy spending time at Park Point in Duluth during the summer months. This photo captures a perfect beach day, showcasing the natural beauty of Lake Superior's shoreline.</p>
+                    <a href="hobbies.html#outdoors">Read more →</a>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <img src="images/fishing.jpg" alt="Summer Fishing in Canada">
+                <div class="hobby-content">
+                    <h3>Fishing Adventures</h3>
+                    <p>During the summer, I had an incredible fishing experience in Canada. I caught some amazing fish, making it a memorable trip that combined my love for fishing with exploring new waters.</p>
+                    <a href="hobbies.html#fishing">Read more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
