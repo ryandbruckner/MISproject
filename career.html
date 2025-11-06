@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Interests - Ryan Bruckner</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <style>
+        .career-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .career-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .career-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .career-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .career-section {
+            background: var(--bg-color);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .career-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+        }
+        
+        .career-path {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .path-card {
+            background: var(--bg-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .path-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .path-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .path-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .skills-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .skills-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-list {
+            text-align: left;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        .skill-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .vision-section {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-color);
+            border-radius: 15px;
+        }
+        
+        .vision-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .vision-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .career-header h1 {
+                font-size: 2rem;
+            }
+            
+            .career-path {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .path-card {
+                padding: 1.5rem;
+            }
+            
+            .path-title {
+                font-size: 1.4rem;
+            }
+            
+            .path-image {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="umd.html">UMD</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="career.html" class="active">Career Interests</a></li>
+            <li><a href="game.html">Interactive Game</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="career-container">
+            <div class="career-header">
+                <h1>My Career Vision</h1>
+                <p>Combining Marketing & Environmental Expertise for Sustainable Impact</p>
+            </div>
+            
+            <div class="career-path">
+                <div class="path-card">
+                    <h3 class="path-title">
+                        🌲 Minnesota Department of Natural Resources (DNR)
+                    </h3>
+                    <img src="images/DNR.jpg" alt="Minnesota DNR" class="path-image">
+                    <p class="path-description">
+                        <strong>Outdoor Natural Resource Management</strong><br><br>
+                        I am passionate about working outdoors for the Minnesota DNR, managing and preserving the rare and precious natural resources our state has to offer. With Minnesota's incredible biodiversity and thousands of lakes, forests, and wildlife habitats, I want to be part of the team that ensures these treasures are protected for future generations. From managing wildlife populations to maintaining hiking trails, from conservation education to habitat restoration, the DNR offers the perfect opportunity to combine my environmental knowledge with hands-on outdoor work.
+                    </p>
+                </div>
+                
+                <div class="path-card">
+                    <h3 class="path-title">
+                        🏙️ City of Duluth - Sustainability & Marketing
+                    </h3>
+                    <img src="images/City of Duluth.png" alt="City of Duluth" class="path-image">
+                    <p class="path-description">
+                        <strong>Green Marketing & Renewable Energy</strong><br><br>
+                        The City of Duluth represents the perfect intersection of my dual majors in Marketing and Environmental Studies. I would love to help Duluth become a leader in sustainability by developing innovative marketing strategies that promote renewable energy adoption, green infrastructure, and environmental consciousness. Using both my marketing expertise and environmental knowledge, I can help create compelling campaigns that make sustainability attractive, accessible, and achievable for residents and businesses alike.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="skills-section">
+                <h2>My Unique Skill Combination</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-category">🎯 Marketing Expertise</div>
+                        <ul class="skill-list">
+                            <li>Brand Development & Strategy</li>
+                            <li>Digital Marketing Campaigns</li>
+                            <li>Community Engagement</li>
+                            <li>Public Relations & Communication</li>
+                            <li>Market Research & Analysis</li>
+                        </ul>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-category">🌍 Environmental Knowledge</div>
+                        <ul class="skill-list">
+                            <li>Sustainability Planning</li>
+                            <li>Natural Resource Management</li>
+                            <li>Environmental Policy</li>
+                            <li>Conservation Biology</li>
+                            <li>Climate Change Solutions</li>
+                        </ul>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-category">🏃‍♂️ Outdoor Experience</div>
+                        <ul class="skill-list">
+                            <li>Wilderness Navigation</li>
+                            <li>Wildlife Habitat Management</li>
+                            <li>Field Research & Monitoring</li>
+                            <li>Trail Maintenance & Construction</li>
+                            <li>Environmental Education</li>
+                        </ul>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-category">🤝 Leadership & Collaboration</div>
+                        <ul class="skill-list">
+                            <li>Team Project Coordination</li>
+                            <li>Community Outreach</li>
+                            <li>Stakeholder Engagement</li>
+                            <li>Problem-Solving & Innovation</li>
+                            <li>Time Management & Organization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vision-section">
+                <h2>My Career Vision</h2>
+                <p class="vision-text">
+                    <strong>I envision a career where I can make a tangible difference in environmental conservation and sustainability.</strong> Whether I'm tracking wildlife populations in the Minnesota wilderness for the DNR or developing innovative marketing campaigns for Duluth's renewable energy initiatives, my goal is to bridge the gap between environmental science and public engagement. I want to help people understand why conservation matters and how they can be part of the solution to our environmental challenges. Through my unique combination of marketing skills and environmental passion, I aim to create positive change that protects Minnesota's natural beauty while building a more sustainable future for all.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
