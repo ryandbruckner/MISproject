@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Snowboard Tree Dodge</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --section-padding: 4rem 2rem;
+            --header-height: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(180deg, #1a365d 0%, #2d4a6e 20%, #4a7ba7 40%, #7fb3d3 60%, #bfd7ea 80%, #f0f8ff 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: var(--header-height);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .game-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        #gameCanvas {
+            border: 4px solid #fff;
+            border-radius: 20px;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 25%, #F0F8FF 50%, #F8F8FF 75%, #FFFFFF 100%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .controls {
+            margin-top: 20px;
+            color: #f0f8ff;
+            font-size: 15px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            display: none;
+            border: 3px solid #ff6b6b;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .restart-btn:hover {
+            background: linear-gradient(45deg, #ee5a52, #dc3545);
+            transform: translateY(-2px);
+        }
+        
+        .music-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            margin: 5px 0;
+        }
+        
+        @keyframes snowfall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="umd.html">UMD</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="career.html">Career Interests</a></li>
+            <li><a href="game.html" class="active">Snowboarding Game</a></li>
+        </ul>
+    </nav>
+    
+    <div class="game-container">
+        <div class="music-controls">
+            <div style="color: white; font-size: 12px;">🎵 Music</div>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="30">
+            <button id="musicToggle" style="background: none; border: 1px solid white; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px;">🔊</button>
+        </div>
+        
+        <div class="game-info">
+            <div>Score: <span id="score">0</span></div>
+            <div>High Score: <span id="highScore">0</span></div>
+            <div>Speed: <span id="speed">1</span></div>
+            <div>Distance: <span id="distance">0</span>m</div>
+        </div>
+        
+        <canvas id="gameCanvas" width="900" height="600"></canvas>
+        
+        <div class="controls">
+            A/D or ←/→ = Carve Left/Right | SPACE = Jump | SHIFT = Speed Boost | R = Restart<br>
+            <em>Realistic snowboard physics - carve through the trees!</em>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>🏔️ Tree Collision!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Distance Traveled: <span id="finalDistance">0</span>m</p>
+            <button class="restart-btn" onclick="restartGame()">🏂 Hit the Slopes Again</button>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="media/roblox-minecraft-fortnite-video-game-music-358426.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Game state
+        let gameRunning = true;
+        let score = 0;
+        let distance = 0;
+        let highScore = localStorage.getItem('snowboardHighScore') || 0;
+        let speed = 1;
+        let gameSpeed = 3;
+        let worldSpeed = 2;
+        
+        // Snowboarder with realistic physics
+        const snowboarder = {
+            x: canvas.width / 2,
+            y: canvas.height - 200,
+            width: 25,
+            height: 45,
+            velocityX: 0,
+            velocityY: 0,
+            angle: 0,
+            onGround: true,
+            carving: false,
+            boost: false,
+            color: '#FF6B6B',
+            trail: []
+        };
+        
+        // Game objects
+        let trees = [];
+        let snowflakes = [];
+        let particles = [];
+        let track = [];
+        
+        // Input handling
+        const keys = {};
+        
+        document.addEventListener('keydown', (e) => {
+            keys[e.key.toLowerCase()] = true;
+            // Prevent default for game keys
+            if([' ', 'arrowleft', 'arrowright', 'shift'].includes(e.key.toLowerCase())) {
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            keys[e.key.toLowerCase()] = false;
+        });
+        
+        // Tree generation with realistic patterns
+        function createTree(x, y) {
+            const treeTypes = [
+                {
+                    width: 15 + Math.random() * 10,
+                    height: 40 + Math.random() * 30,
+                    trunkColor: '#8B4513',
+                    foliageColor: '#228B22',
+                    type: 'pine',
+                    points: 3 + Math.random() * 4
+                },
+                {
+                    width: 20 + Math.random() * 15,
+                    height: 60 + Math.random() * 40,
+                    trunkColor: '#654321',
+                    foliageColor: '#006400',
+                    type: 'fir',
+                    points: 4 + Math.random() * 5
+                },
+                {
+                    width: 12 + Math.random() * 8,
+                    height: 30 + Math.random() * 25,
+                    trunkColor: '#A0522D',
+                    foliageColor: '#32CD32',
+                    type: 'spruce',
+                    points: 2 + Math.random() * 3
+                }
+            ];
+            
+            const treeType = treeTypes[Math.floor(Math.random() * treeTypes.length)];
+            return {
+                x: x,
+                y: y,
+                ...treeType,
+                speed: worldSpeed + Math.random() * 2,
+                sway: 0,
+                swaying: Math.random() * Math.PI * 2
+            };
+        }
+        
+        // Create snowflake
+        function createSnowflake() {
+            return {
+                x: Math.random() * canvas.width,
+                y: -10,
+                size: Math.random() * 4 + 1,
+                speed: Math.random() * 3 + 1,
+                opacity: Math.random() * 0.8 + 0.2,
+                drift: Math.random() * 0.5 - 0.25,
+                rotation: Math.random() * 360
+            };
+        }
+        
+        // Collision detection
+        function checkCollision(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+        
+        // Create particle effect
+        function createSnowParticles(x, y, count = 15) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    velocityX: (Math.random() - 0.5) * 12,
+                    velocityY: (Math.random() - 0.5) * 12,
+                    life: 40 + Math.random() * 20,
+                    color: '#FFFFFF',
+                    size: Math.random() * 4 + 2,
+                    gravity: 0.2
+                });
+            }
+        }
+        
+        // Update snowboarder with realistic physics
+        function updateSnowboarder() {
+            // Carving mechanics
+            if (keys['a'] || keys['arrowleft']) {
+                snowboarder.velocityX -= 0.8;
+                snowboarder.carving = true;
+            } else if (keys['d'] || keys['arrowright']) {
+                snowboarder.velocityX += 0.8;
+                snowboarder.carving = true;
+            } else {
+                snowboarder.carving = false;
+            }
+            
+            // Friction and damping
+            snowboarder.velocityX *= 0.85;
+            
+            // Speed boost
+            snowboarder.boost = keys['shift'];
+            if (snowboarder.boost) {
+                worldSpeed += 0.1;
+                createSnowParticles(snowboarder.x, snowboarder.y + snowboarder.height, 3);
+            }
+            
+            // Jumping
+            if ((keys[' '] || keys['w'] || keys['arrowup']) && snowboarder.onGround) {
+                snowboarder.velocityY = -18;
+                snowboarder.onGround = false;
+                createSnowParticles(snowboarder.x + snowboarder.width/2, snowboarder.y + snowboarder.height, 10);
+            }
+            
+            // Gravity and physics
+            snowboarder.velocityY += 0.8;
+            
+            // Update position
+            snowboarder.x += snowboarder.velocityX;
+            snowboarder.y += snowboarder.velocityY;
+            
+            // Angle for carving effect
+            snowboarder.angle = snowboarder.velocityX * 2;
+            
+            // Boundary checking
+            snowboarder.x = Math.max(0, Math.min(canvas.width - snowboarder.width, snowboarder.x));
+            
+            // Ground collision
+            const groundY = canvas.height - 80;
+            if (snowboarder.y + snowboarder.height > groundY) {
+                snowboarder.y = groundY - snowboarder.height;
+                snowboarder.velocityY = 0;
+                snowboarder.onGround = true;
+                
+                // Landing particles
+                if (!snowboarder.onGround) {
+                    createSnowParticles(snowboarder.x + snowboarder.width/2, groundY, 8);
+                }
+            }
+            
+            // Trail effect
+            if (snowboarder.carving && snowboarder.onGround) {
+                snowboarder.trail.push({
+                    x: snowboarder.x + snowboarder.width/2,
+                    y: snowboarder.y + snowboarder.height,
+                    life: 20
+                });
+            }
+            
+            // Keep trail short
+            if (snowboarder.trail.length > 30) {
+                snowboarder.trail.shift();
+            }
+        }
+        
+        // Update trees
+        function updateTrees() {
+            // Move trees downward (toward snowboarder)
+            trees.forEach(tree => {
+                tree.y += tree.speed;
+                tree.swaying += 0.02;
+                tree.sway = Math.sin(tree.swaying) * 2;
+            });
+            
+            // Remove off-screen trees
+            trees = trees.filter(tree => tree.y < canvas.height + 100);
+            
+            // Generate new trees in realistic patterns
+            if (Math.random() < 0.015 + speed * 0.002) {
+                // Create 1-3 trees in a cluster
+                const clusterCount = Math.random() < 0.7 ? 1 : (Math.random() < 0.5 ? 2 : 3);
+                
+                for (let i = 0; i < clusterCount; i++) {
+                    const x = Math.random() * (canvas.width - 50) + 25;
+                    const y = -100 - (i * 30);
+                    trees.push(createTree(x, y));
+                }
+            }
+            
+            // Check collisions
+            trees.forEach(tree => {
+                if (checkCollision(snowboarder, tree)) {
+                    gameOver();
+                }
+            });
+        }
+        
+        // Update snowflakes
+        function updateSnowflakes() {
+            snowflakes.forEach(snowflake => {
+                snowflake.y += snowflake.speed;
+                snowflake.x += snowflake.drift + Math.sin(snowflake.rotation * 0.1) * 0.3;
+                snowflake.rotation += 2;
+            });
+            
+            snowflakes = snowflakes.filter(snowflake => snowflake.y < canvas.height);
+            
+            if (Math.random() < 0.4) {
+                snowflakes.push(createSnowflake());
+            }
+        }
+        
+        // Update particles
+        function updateParticles() {
+            particles.forEach(particle => {
+                particle.x += particle.velocityX;
+                particle.y += particle.velocityY;
+                particle.velocityX *= 0.95;
+                particle.velocityY += particle.gravity;
+                particle.life--;
+            });
+            
+            particles = particles.filter(particle => particle.life > 0);
+        }
+        
+        // Update trail
+        function updateTrail() {
+            snowboarder.trail.forEach(particle => {
+                particle.life--;
+                particle.y += 2;
+            });
+            
+            snowboarder.trail = snowboarder.trail.filter(particle => particle.life > 0);
+        }
+        
+        // Update score
+        function updateScore() {
+            score += 1;
+            distance += worldSpeed;
+            speed = Math.floor(score / 300) + 1;
+            gameSpeed = 3 + speed * 0.8;
+            worldSpeed = 2 + speed * 0.5;
+            
+            document.getElementById('score').textContent = score;
+            document.getElementById('speed').textContent = speed;
+            document.getElementById('distance').textContent = Math.floor(distance / 10);
+        }
+        
+        // Game over
+        function gameOver() {
+            gameRunning = false;
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('snowboardHighScore', highScore);
+                document.getElementById('highScore').textContent = highScore;
+            }
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalDistance').textContent = Math.floor(distance / 10);
+            document.getElementById('gameOver').style.display = 'block';
+            
+            // Big crash particles
+            createSnowParticles(snowboarder.x + snowboarder.width/2, snowboarder.y + snowboarder.height/2, 25);
+        }
+        
+        // Restart game
+        function restartGame() {
+            gameRunning = true;
+            score = 0;
+            distance = 0;
+            speed = 1;
+            gameSpeed = 3;
+            worldSpeed = 2;
+            trees = [];
+            snowflakes = [];
+            particles = [];
+            snowboarder.x = canvas.width / 2;
+            snowboarder.y = canvas.height - 200;
+            snowboarder.velocityX = 0;
+            snowboarder.velocityY = 0;
+            snowboarder.onGround = true;
+            snowboarder.trail = [];
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('score').textContent = '0';
+            document.getElementById('speed').textContent = '1';
+            document.getElementById('distance').textContent = '0';
+        }
+        
+        // Rendering functions
+        function drawBackground() {
+            // Sky gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(0.3, '#E0F6FF');
+            gradient.addColorStop(0.6, '#F0F8FF');
+            gradient.addColorStop(1, '#FFFFFF');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Mountain silhouettes
+            ctx.fillStyle = 'rgba(100, 149, 237, 0.3)';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height * 0.4);
+            ctx.lineTo(canvas.width * 0.3, canvas.height * 0.2);
+            ctx.lineTo(canvas.width * 0.6, canvas.height * 0.3);
+            ctx.lineTo(canvas.width * 0.9, canvas.height * 0.1);
+            ctx.lineTo(canvas.width, canvas.height * 0.25);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Snow ground
+            ctx.fillStyle = '#F5F5F5';
+            ctx.fillRect(0, canvas.height - 80, canvas.width, 80);
+            
+            // Fresh snow
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+        }
+        
+        function drawTrees() {
+            trees.forEach(tree => {
+                ctx.save();
+                ctx.translate(tree.x + tree.sway, tree.y);
+                
+                // Trunk
+                ctx.fillStyle = tree.trunkColor;
+                ctx.fillRect(-3, tree.height - 20, 6, 20);
+                
+                // Foliage
+                if (tree.type === 'pine' || tree.type === 'fir') {
+                    ctx.fillStyle = tree.foliageColor;
+                    ctx.beginPath();
+                    for (let i = 0; i < tree.points; i++) {
+                        const y = tree.height - (i * tree.height / tree.points);
+                        const width = tree.width * (1 - i / tree.points);
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(-width/2, y + tree.height / tree.points);
+                        ctx.lineTo(width/2, y + tree.height / tree.points);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                } else {
+                    // Spruce - more conical
+                    ctx.fillStyle = tree.foliageColor;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(-tree.width/2, tree.height - 15);
+                    ctx.lineTo(tree.width/2, tree.height - 15);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            });
+        }
+        
+        function drawSnowflakes() {
+            snowflakes.forEach(snowflake => {
+                ctx.save();
+                ctx.globalAlpha = snowflake.opacity;
+                ctx.translate(snowflake.x, snowflake.y);
+                ctx.rotate(snowflake.rotation * Math.PI / 180);
+                ctx.fillStyle = '#FFFFFF';
+                
+                // Star shape
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angle = (i * Math.PI) / 3;
+                    const x = Math.cos(angle) * snowflake.size;
+                    const y = Math.sin(angle) * snowflake.size;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            });
+        }
+        
+        function drawParticles() {
+            particles.forEach(particle => {
+                ctx.save();
+                ctx.globalAlpha = particle.life / 60;
+                ctx.fillStyle = particle.color;
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+        }
+        
+        function drawTrail() {
+            snowboarder.trail.forEach(trailParticle => {
+                ctx.save();
+                ctx.globalAlpha = trailParticle.life / 20;
+                ctx.fillStyle = '#FFFFFF';
+                ctx.beginPath();
+                ctx.arc(trailParticle.x, trailParticle.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+        }
+        
+        function drawSnowboarder() {
+            ctx.save();
+            ctx.translate(snowboarder.x + snowboarder.width/2, snowboarder.y + snowboarder.height/2);
+            ctx.rotate(snowboarder.angle * Math.PI / 180);
+            
+            // Shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillRect(-12, snowboarder.height/2 + 10, 24, 8);
+            
+            // Body
+            ctx.fillStyle = snowboarder.color;
+            ctx.fillRect(-12, -20, 24, 35);
+            
+            // Head with helmet
+            ctx.fillStyle = '#FFDBB5';
+            ctx.fillRect(-8, -35, 16, 16);
+            
+            // Helmet
+            ctx.fillStyle = '#FF4500';
+            ctx.fillRect(-10, -38, 20, 8);
+            
+            // Arms
+            ctx.fillStyle = '#FFDBB5';
+            ctx.fillRect(-18, -15, 6, 18);
+            ctx.fillRect(12, -15, 6, 18);
+            
+            // Snowboard
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(-15, snowboarder.height/2 - 5, 30, 10);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(-12, snowboarder.height/2 - 3, 24, 2);
+            
+            ctx.restore();
+        }
+        
+        // Music controls
+        const music = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicToggle = document.getElementById('musicToggle');
+        
+        // Set initial volume
+        music.volume = 0.3;
+        
+        // Volume control
+        volumeSlider.addEventListener('input', (e) => {
+            music.volume = e.target.value / 100;
+        });
+        
+        // Music toggle
+        musicToggle.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                musicToggle.textContent = '🔊';
+            } else {
+                music.pause();
+                musicToggle.textContent = '🔇';
+            }
+        });
+        
+        // Auto-play music (may be blocked by browser)
+        document.addEventListener('click', function startMusic() {
+            if (music.paused) {
+                music.play().catch(e => console.log('Autoplay prevented'));
+            }
+            document.removeEventListener('click', startMusic);
+        });
+        
+        // Game loop
+        function gameLoop() {
+            if (gameRunning) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                drawBackground();
+                
+                updateSnowboarder();
+                updateTrees();
+                updateSnowflakes();
+                updateParticles();
+                updateTrail();
+                updateScore();
+                
+                drawTrail();
+                drawTrees();
+                drawSnowflakes();
+                drawParticles();
+                drawSnowboarder();
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Initialize game
+        document.getElementById('highScore').textContent = highScore;
+        
+        // Start the game
+        gameLoop();
+        
+        // Initialize game objects
+        for (let i = 0; i < 30; i++) {
+            snowflakes.push(createSnowflake());
+        }
+        
+        // Generate initial trees
+        for (let i = 0; i < 8; i++) {
+            const x = Math.random() * (canvas.width - 100) + 50;
+            const y = -200 - (i * 80);
+            trees.push(createTree(x, y));
+        }
+    </script>
+</body>
+</html>
